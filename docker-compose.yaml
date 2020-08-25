@@ -1,0 +1,32 @@
+---
+version: '3.7'
+
+services:
+ portalsvc:
+  build:
+   context: nginx/
+  ports:
+   - "80:80"
+   - "443:443"
+  volumes:
+   - type: bind
+     source: ./nginx/config
+     target: /etc/nginx/
+   - type: bind
+     source: ./nginx/config/sites
+     target: /etc/nginx/conf.d
+   - type: bind
+     source: ./nginx/certificates
+     target: /etc/nginx/certificates
+   - type: bind
+     source: ./nginx/www
+     target: /usr/share/nginx/www
+  restart: unless-stopped
+  networks:
+   - portal_net
+
+
+
+networks:
+ portal_net:
+  driver: bridge
