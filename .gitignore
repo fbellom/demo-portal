@@ -1,2 +1,4 @@
 portal/
 nginx/certificates/*
+*.exe
+*.dmg
